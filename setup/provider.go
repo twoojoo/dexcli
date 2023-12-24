@@ -20,7 +20,7 @@ type ProviderParams struct {
 
 func SetupProvider(ctx context.Context, c *cli.Context) (*oidc.IDTokenVerifier, oauth2.Config, error) {
 	values := ProviderParams{
-		DexURL:       c.String("dex-url"),
+		DexURL:       c.String("dex-base-url"),
 		Port:         c.Uint("port"),
 		ClientID:     c.String("client-id"),
 		ClientSecret: c.String("client-secret"),

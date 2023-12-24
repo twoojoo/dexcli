@@ -6,7 +6,7 @@ import (
 
 var Flags []cli.Flag = []cli.Flag{
 	cli.StringFlag{
-		Name:  "dex-url",
+		Name:  "dex-base-url",
 		Value: "http://127.0.0.1:5556",
 	},
 	cli.UintFlag{
