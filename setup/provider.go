@@ -3,7 +3,6 @@ package setup
 import (
 	"context"
 	"fmt"
-	"log"
 
 	"github.com/coreos/go-oidc/v3/oidc"
 	"github.com/urfave/cli"
@@ -28,7 +27,6 @@ func SetupProvider(ctx context.Context, c *cli.Context) (*oidc.IDTokenVerifier, 
 	}
 
 	issuer := fmt.Sprintf("%v/dex", values.DexURL)
-	log.Println(issuer)
 
 	provider, err := oidc.NewProvider(ctx, issuer)
 	if err != nil {

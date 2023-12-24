@@ -4,7 +4,7 @@ import (
 	"errors"
 	"os"
 
-	"github.com/twoojoo/dexcli/signin"
+	"github.com/twoojoo/dexcli/base"
 	"github.com/urfave/cli"
 )
 
@@ -30,8 +30,14 @@ func runCLI() error {
 		{
 			Name:   "signin",
 			Usage:  "Performs a sign-in using a browser",
-			Flags:  signin.Flags,
-			Action: signin.Signin,
+			Flags:  base.SigninFlags,
+			Action: base.Signin,
+		},
+		{
+			Name:   "verify",
+			Usage:  "attempts to verify an access_token",
+			Flags:  base.VerifyFlags,
+			Action: base.Verify,
 		},
 		{
 			Name:  "connector",

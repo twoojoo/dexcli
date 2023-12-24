@@ -12,6 +12,7 @@ import (
 	"time"
 
 	"github.com/coreos/go-oidc/v3/oidc"
+	"github.com/twoojoo/dexcli/utils"
 	"golang.org/x/oauth2"
 )
 
@@ -169,11 +170,13 @@ func (a ApplicationHanlder) handleCallback(w http.ResponseWriter, r *http.Reques
 		RefreshToken: token.RefreshToken,
 	})
 
-	log.Println("authentication succeeded:")
-	fmt.Println("access_token:", token.AccessToken)
-	fmt.Println("refresh_token:", token.RefreshToken)
-	fmt.Println("id_token:", rawIDToken)
-	fmt.Println("expire_at:", token.Expiry.Unix())
+	p, err := utils.PrettifyJSON(token)
+	if err != nil {
+		http.Error(w, fmt.Sprintf("failed to prettify token: %v", err), http.StatusInternalServerError)
+		return
+	}
+
+	fmt.Println(p)
 
 	go func() {
 		time.Sleep(300 * time.Millisecond)
