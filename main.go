@@ -16,7 +16,7 @@ var (
 func main() {
 	app := cli.NewApp()
 	app.Name = "dexcli"
-	app.Usage = "a CLI for Dex"
+	app.Usage = "a Command Line Interface for Dex"
 
 	app.Commands = []cli.Command{
 		{
