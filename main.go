@@ -21,6 +21,7 @@ func main() {
 	app.Commands = []cli.Command{
 		{
 			Name:   "signin",
+			Usage:  "Performs a sign-in using a browser",
 			Flags:  signin.Flags,
 			Action: signin.Signin,
 		},
