@@ -4,7 +4,7 @@
 make install
 ```
 
-**buils**
+**build**
 
 ```bash
 make build
