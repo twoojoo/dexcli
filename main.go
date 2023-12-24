@@ -4,7 +4,7 @@ import (
 	"errors"
 	"os"
 
-	"github.com/twoojoo/dexcli/base"
+	"github.com/twoojoo/dexctl/base"
 	"github.com/urfave/cli"
 )
 
@@ -23,7 +23,7 @@ func main() {
 
 func runCLI() error {
 	app := cli.NewApp()
-	app.Name = "dexcli"
+	app.Name = "dexctl"
 	app.Usage = "a Command Line Interface for Dex"
 
 	app.Commands = []cli.Command{

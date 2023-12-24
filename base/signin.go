@@ -6,9 +6,9 @@ import (
 	"log"
 	"time"
 
-	"github.com/twoojoo/dexcli/server"
-	"github.com/twoojoo/dexcli/setup"
-	"github.com/twoojoo/dexcli/utils"
+	"github.com/twoojoo/dexctl/server"
+	"github.com/twoojoo/dexctl/setup"
+	"github.com/twoojoo/dexctl/utils"
 	"github.com/urfave/cli"
 )
 

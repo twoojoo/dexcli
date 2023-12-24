@@ -1,4 +1,4 @@
-module github.com/twoojoo/dexcli
+module github.com/twoojoo/dexctl
 
 go 1.21.5
 

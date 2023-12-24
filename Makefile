@@ -1,5 +1,5 @@
 build:
-	@go build -o ./bin/dexcli *.go
+	@go build -o ./bin/dexctl *.go
 
 install:
 	@go install .

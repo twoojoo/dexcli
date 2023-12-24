@@ -12,7 +12,7 @@ import (
 	"time"
 
 	"github.com/coreos/go-oidc/v3/oidc"
-	"github.com/twoojoo/dexcli/utils"
+	"github.com/twoojoo/dexctl/utils"
 	"golang.org/x/oauth2"
 )
 

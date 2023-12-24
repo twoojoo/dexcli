@@ -5,8 +5,8 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/twoojoo/dexcli/setup"
-	"github.com/twoojoo/dexcli/utils"
+	"github.com/twoojoo/dexctl/setup"
+	"github.com/twoojoo/dexctl/utils"
 	"github.com/urfave/cli"
 )
 
