@@ -2,7 +2,6 @@ package main
 
 import (
 	"errors"
-	"log"
 	"os"
 
 	"github.com/twoojoo/dexcli/signin"
@@ -15,6 +14,14 @@ var (
 )
 
 func main() {
+	err := runCLI()
+
+	if err != nil {
+		panic(err)
+	}
+}
+
+func runCLI() error {
 	app := cli.NewApp()
 	app.Name = "dexcli"
 	app.Usage = "a Command Line Interface for Dex"
@@ -106,8 +113,5 @@ func main() {
 		},
 	}
 
-	err := app.Run(os.Args)
-	if err != nil {
-		log.Fatal(err)
-	}
+	return app.Run(os.Args)
 }
