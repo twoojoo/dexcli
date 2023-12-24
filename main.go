@@ -10,7 +10,8 @@ import (
 )
 
 var (
-	errCommandNotAvailable = errors.New("command not available")
+	errCommandNotAvailable   = errors.New("command not available")
+	usageCommandNotAvaliable = "command not available"
 )
 
 func main() {
@@ -26,64 +27,79 @@ func main() {
 			Action: signin.Signin,
 		},
 		{
-			Name: "connector",
+			Name:  "connector",
+			Usage: "connector-related commands",
 			Subcommands: []cli.Command{
 				{
 					Name:   "list",
+					Usage:  usageCommandNotAvaliable,
 					Action: func(c *cli.Context) error { return errCommandNotAvailable },
 				},
 				{
 					Name:   "create",
+					Usage:  usageCommandNotAvaliable,
 					Action: func(c *cli.Context) error { return errCommandNotAvailable },
 				},
 				{
 					Name:   "delete",
+					Usage:  usageCommandNotAvaliable,
 					Action: func(c *cli.Context) error { return errCommandNotAvailable },
 				},
 				{
 					Name:   "update",
+					Usage:  usageCommandNotAvaliable,
 					Action: func(c *cli.Context) error { return errCommandNotAvailable },
 				},
 			},
 		},
 		{
-			Name: "client",
+			Name:  "client",
+			Usage: "client-related commands",
 			Subcommands: []cli.Command{
 				{
 					Name:   "list",
+					Usage:  usageCommandNotAvaliable,
 					Action: func(c *cli.Context) error { return errCommandNotAvailable },
 				},
 				{
 					Name:   "create",
+					Usage:  usageCommandNotAvaliable,
 					Action: func(c *cli.Context) error { return errCommandNotAvailable },
 				},
 				{
 					Name:   "delete",
+					Usage:  usageCommandNotAvaliable,
 					Action: func(c *cli.Context) error { return errCommandNotAvailable },
 				},
 				{
 					Name:   "update",
+					Usage:  usageCommandNotAvaliable,
 					Action: func(c *cli.Context) error { return errCommandNotAvailable },
 				},
 			},
 		},
 		{
-			Name: "password",
+			Name:  "password",
+			Usage: "password-related commands",
 			Subcommands: []cli.Command{
 				{
 					Name:   "list",
+					Usage:  usageCommandNotAvaliable,
 					Action: func(c *cli.Context) error { return errCommandNotAvailable },
 				},
 				{
 					Name:   "create",
+					Usage:  usageCommandNotAvaliable,
 					Action: func(c *cli.Context) error { return errCommandNotAvailable },
 				},
 				{
 					Name:   "delete",
+					Usage:  usageCommandNotAvaliable,
 					Action: func(c *cli.Context) error { return errCommandNotAvailable },
 				},
 				{
 					Name:   "update",
+					Usage:  usageCommandNotAvaliable,
 					Action: func(c *cli.Context) error { return errCommandNotAvailable },
 				},
 			},
