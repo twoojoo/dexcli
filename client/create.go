@@ -6,7 +6,6 @@ import (
 	"fmt"
 
 	"github.com/dexidp/dex/api/v2"
-	"github.com/google/uuid"
 	"github.com/twoojoo/dexctl/setup"
 	"github.com/twoojoo/dexctl/utils"
 	"github.com/urfave/cli"

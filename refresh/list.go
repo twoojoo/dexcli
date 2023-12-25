@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"log"
 
 	"github.com/dexidp/dex/api/v2"
 	"github.com/twoojoo/dexctl/setup"
