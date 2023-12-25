@@ -4,13 +4,18 @@ import (
 	"context"
 
 	"fmt"
+
 	"github.com/dexidp/dex/api/v2"
 	"github.com/urfave/cli"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 )
 
 func SetupGrpcClient(ctx context.Context, c *cli.Context) (api.DexClient, error) {
-	conn, err := grpc.Dial(c.String("grpc-url"))
+	url := c.String("grpc-url")
+
+	fmt.Println(url)
+	conn, err := grpc.Dial(url, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		return nil, fmt.Errorf("dial: %v", err)
 	}

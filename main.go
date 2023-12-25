@@ -2,10 +2,13 @@ package main
 
 import (
 	"errors"
+	"log"
 	"os"
 
 	"github.com/twoojoo/dexctl/base"
+	"github.com/twoojoo/dexctl/client"
 	"github.com/twoojoo/dexctl/connector"
+	"github.com/twoojoo/dexctl/password"
 	"github.com/urfave/cli"
 )
 
@@ -18,13 +21,14 @@ func main() {
 	err := runCLI()
 
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 }
 
 func runCLI() error {
 	app := cli.NewApp()
 	app.Name = "dexctl"
+	app.EnableBashCompletion = true
 	app.Usage = "a Command Line Interface for Dex"
 
 	app.Commands = []cli.Command{
@@ -78,8 +82,8 @@ func runCLI() error {
 				},
 				{
 					Name:   "create",
-					Usage:  usageCommandNotAvaliable,
-					Action: func(c *cli.Context) error { return errCommandNotAvailable },
+					Flags:  client.CreateClientFlags,
+					Action: client.CreateClient,
 				},
 				{
 					Name:   "delete",
@@ -104,8 +108,8 @@ func runCLI() error {
 				},
 				{
 					Name:   "create",
-					Usage:  usageCommandNotAvaliable,
-					Action: func(c *cli.Context) error { return errCommandNotAvailable },
+					Flags:  password.CreatePasswordFlags,
+					Action: password.CreatePassword,
 				},
 				{
 					Name:   "delete",

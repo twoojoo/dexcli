@@ -1,6 +1,11 @@
 package connector
 
-import "github.com/urfave/cli"
+import (
+	// "context"
+
+	// "github.com/twoojoo/dexctl/setup"
+	"github.com/urfave/cli"
+)
 
 var CreateConnectorFlags []cli.Flag = []cli.Flag{
 	cli.StringFlag{
@@ -13,3 +18,14 @@ var CreateConnectorFlags []cli.Flag = []cli.Flag{
 		Value: "random UUID",
 	},
 }
+
+// func CreateConnector(ctx context.Context, c *cli.Context) error {
+// 	grpc, err := setup.SetupGrpcClient(ctx, c)
+// 	if err != nil {
+// 		return err
+// 	}
+
+// 	grpc.
+
+// 	return nil
+// }
