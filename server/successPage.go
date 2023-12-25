@@ -282,7 +282,7 @@ var successPage []byte = []byte(`<!DOCTYPE html>
 
 
 <div class="theme-panel">
-  <h2 class="theme-heading">Success!</h2>
+  <h2 class="theme-heading" style="color: green">Success!</h2>
   <p>go back to dexctl</p>
 </div>
 
