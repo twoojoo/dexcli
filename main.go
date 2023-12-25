@@ -91,9 +91,10 @@ func runCLI() error {
 					Action: func(c *cli.Context) error { return errCommandNotAvailable },
 				},
 				{
-					Name:   "update",
-					Usage:  usageCommandNotAvaliable,
-					Action: func(c *cli.Context) error { return errCommandNotAvailable },
+					Name:      "update",
+					ArgsUsage: "<client_id>",
+					Flags:     client.UpdateClientFlags,
+					Action:    client.UpdateClient,
 				},
 			},
 		},
