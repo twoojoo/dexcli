@@ -16,6 +16,11 @@ A `Dex` instance must be running. `Dex` defaults should match `dexctl` ones:
 - web port: 5556
 - grpc port: 5558
 
+`help` flag available for every command
+```bash
+dexctl --help
+```
+
 ```bash
 dexctl version [--grpc-url <host:port>]
 ```
