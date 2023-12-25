@@ -34,25 +34,25 @@ func runCLI() error {
 	app.Commands = []cli.Command{
 		{
 			Name:   "signin",
-			Usage:  "Performs a sign-in using a browser",
+			Usage:  "Performs a sign-in (opens up a browser page)",
 			Flags:  base.SigninFlags,
 			Action: base.Signin,
 		},
 		{
 			Name:   "verify",
-			Usage:  "attempts to verify an access_token",
+			Usage:  "Attempts to verify an access token or ID token",
 			Flags:  base.VerifyFlags,
 			Action: base.Verify,
 		},
 		{
 			Name:   "version",
-			Usage:  "get the version of the Dex server",
+			Usage:  "Get the version of the Dex server",
 			Flags:  base.VersionFlags,
 			Action: base.Version,
 		},
 		{
 			Name:  "connector",
-			Usage: "connector-related commands",
+			Usage: "Connector-related commands",
 			Subcommands: []cli.Command{
 				{
 					Name:   "list",
@@ -78,7 +78,7 @@ func runCLI() error {
 		},
 		{
 			Name:  "client",
-			Usage: "client-related commands",
+			Usage: "Client-related commands",
 			Subcommands: []cli.Command{
 				{
 					Name:   "list",
@@ -87,20 +87,20 @@ func runCLI() error {
 				},
 				{
 					Name:   "create",
-					Usage:  "add a new client",
+					Usage:  "Add a new client",
 					Flags:  client.CreateClientFlags,
 					Action: client.CreateClient,
 				},
 				{
 					Name:      "delete",
-					Usage:     "delete an existing client",
+					Usage:     "Delete an existing client",
 					ArgsUsage: "<client_id>",
 					Flags:     client.DeleteClientFlags,
 					Action:    client.DeleteClient,
 				},
 				{
 					Name:      "update",
-					Usage:     "update an existing client",
+					Usage:     "Update an existing client",
 					ArgsUsage: "<client_id>",
 					Flags:     client.UpdateClientFlags,
 					Action:    client.UpdateClient,
@@ -109,45 +109,45 @@ func runCLI() error {
 		},
 		{
 			Name:  "password",
-			Usage: "password-related commands",
+			Usage: "Password-related commands",
 			Subcommands: []cli.Command{
 				{
 					Name:      "get",
-					Usage:     "retrieves user settings by its email",
+					Usage:     "Retrieves a password (user)",
 					ArgsUsage: "<email>",
 					Flags:     password.GetPasswordFlags,
 					Action:    password.GetPassword,
 				},
 				{
 					Name:   "list",
-					Usage:  "lists all users",
+					Usage:  "Lists all passwords (users)",
 					Flags:  password.ListPasswordFlags,
 					Action: password.ListPassword,
 				},
 				{
 					Name:      "create",
-					Usage:     "add a new user",
+					Usage:     "Add a new password (user)",
 					ArgsUsage: "<email>",
 					Flags:     password.CreatePasswordFlags,
 					Action:    password.CreatePassword,
 				},
 				{
 					Name:      "delete",
-					Usage:     "delete an existing user",
+					Usage:     "Delete an existing password (user)",
 					ArgsUsage: "<email>",
 					Flags:     password.DeletePasswordFlags,
 					Action:    password.DeletePassword,
 				},
 				{
 					Name:      "update",
-					Usage:     "update an existing user",
+					Usage:     "Update an existing password (user)",
 					ArgsUsage: "<email>",
 					Flags:     password.UpdatePasswordFlags,
 					Action:    password.UpdatePassword,
 				},
 				{
 					Name:      "verify",
-					Usage:     "attempts to verify a password for a user email",
+					Usage:     "Attempts to verify a password for a user email",
 					ArgsUsage: "<email>",
 					Flags:     password.VerifyPasswordFlags,
 					Action:    password.VerifyPassword,
@@ -156,7 +156,7 @@ func runCLI() error {
 		},
 		{
 			Name:  "refresh",
-			Usage: "refresh-related commands",
+			Usage: "Refresh-related commands",
 			Subcommands: []cli.Command{
 				{
 					Name:      "list",

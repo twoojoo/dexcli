@@ -18,10 +18,6 @@ var VerifyPasswordFlags []cli.Flag = []cli.Flag{
 		Value: "127.0.0.1:5557",
 		Usage: "gRPC host and port",
 	},
-	cli.StringFlag{
-		Name:     "password, p",
-		Required: true,
-	},
 }
 
 func VerifyPassword(c *cli.Context) error {
@@ -38,9 +34,14 @@ func VerifyPassword(c *cli.Context) error {
 		return err
 	}
 
+	password := c.Args().Get(1)
+	if password == "" {
+		return errors.New("password must be provided as second argument")
+	}
+
 	resp, err := grpc.VerifyPassword(ctx, &api.VerifyPasswordReq{
 		Email:    email,
-		Password: c.String("password"),
+		Password: password,
 	})
 
 	if err != nil {

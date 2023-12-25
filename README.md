@@ -73,5 +73,5 @@ dexctl password delete <email> [--grpc-url <host:port>]
 ```
 
 ```bash
-dexctl password verify <email> --password <password> [--grpc-url <host:port>]
+dexctl password verify <email> <password> [--grpc-url <host:port>]
 ```
