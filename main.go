@@ -7,7 +7,6 @@ import (
 
 	"github.com/twoojoo/dexctl/base"
 	"github.com/twoojoo/dexctl/client"
-	"github.com/twoojoo/dexctl/connector"
 	"github.com/twoojoo/dexctl/password"
 	"github.com/urfave/cli"
 )
@@ -62,7 +61,6 @@ func runCLI() error {
 				{
 					Name:   "create",
 					Usage:  usageCommandNotAvaliable,
-					Flags:  connector.CreateConnectorFlags,
 					Action: func(c *cli.Context) error { return errCommandNotAvailable },
 				},
 				{
