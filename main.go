@@ -50,32 +50,32 @@ func runCLI() error {
 			Flags:  base.VersionFlags,
 			Action: base.Version,
 		},
-		{
-			Name:  "connector",
-			Usage: "Connector-related commands",
-			Subcommands: []cli.Command{
-				{
-					Name:   "list",
-					Usage:  usageCommandNotAvaliable,
-					Action: func(c *cli.Context) error { return errCommandNotAvailable },
-				},
-				{
-					Name:   "create",
-					Usage:  usageCommandNotAvaliable,
-					Action: func(c *cli.Context) error { return errCommandNotAvailable },
-				},
-				{
-					Name:   "delete",
-					Usage:  usageCommandNotAvaliable,
-					Action: func(c *cli.Context) error { return errCommandNotAvailable },
-				},
-				{
-					Name:   "update",
-					Usage:  usageCommandNotAvaliable,
-					Action: func(c *cli.Context) error { return errCommandNotAvailable },
-				},
-			},
-		},
+		// {
+		// 	Name:  "connector",
+		// 	Usage: "Connector-related commands",
+		// 	Subcommands: []cli.Command{
+		// 		{
+		// 			Name:   "list",
+		// 			Usage:  usageCommandNotAvaliable,
+		// 			Action: func(c *cli.Context) error { return errCommandNotAvailable },
+		// 		},
+		// 		{
+		// 			Name:   "create",
+		// 			Usage:  usageCommandNotAvaliable,
+		// 			Action: func(c *cli.Context) error { return errCommandNotAvailable },
+		// 		},
+		// 		{
+		// 			Name:   "delete",
+		// 			Usage:  usageCommandNotAvaliable,
+		// 			Action: func(c *cli.Context) error { return errCommandNotAvailable },
+		// 		},
+		// 		{
+		// 			Name:   "update",
+		// 			Usage:  usageCommandNotAvaliable,
+		// 			Action: func(c *cli.Context) error { return errCommandNotAvailable },
+		// 		},
+		// 	},
+		// },
 		{
 			Name:  "client",
 			Usage: "Client-related commands",
