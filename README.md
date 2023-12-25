@@ -23,7 +23,7 @@ dexctl client create <client_id> --name <name> --secret <secret>  --redirect-uri
 ```
 
 ```bash
-dexctl client update <client_id> --name <name> 
+dexctl client update <client_id> --name <new-name> 
 ```
 
 ```bash
