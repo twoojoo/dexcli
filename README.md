@@ -9,7 +9,7 @@ dexctl version
 ```
 
 ```bash
-dexctl signin 
+dexctl signin [--browser <browser>]
 ```
 
 ```bash
@@ -19,13 +19,13 @@ dexctl verify <token> --client-id <client_id>
 **clients**
 
 ```bash
-dexctl client create my-client-id-123 --name MyClientName --secret s3Cr3TsTr1nG --redirect-uris https://redirect/auth/here
+dexctl client create <client_id> --name <name> --secret <secret>  --redirect-uris <uri1,uri2...> 
 ```
 
 ```bash
-dexctl client update my-client-id-123 --name MyNewClientName
+dexctl client update <client_id> --name <name> 
 ```
 
 ```bash
-dexctl client update my-client-id-123
+dexctl client update <client_id>
 ```
