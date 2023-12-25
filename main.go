@@ -107,9 +107,10 @@ func runCLI() error {
 					Action: func(c *cli.Context) error { return errCommandNotAvailable },
 				},
 				{
-					Name:   "create",
-					Flags:  password.CreatePasswordFlags,
-					Action: password.CreatePassword,
+					Name:      "create",
+					ArgsUsage: "<email>",
+					Flags:     password.CreatePasswordFlags,
+					Action:    password.CreatePassword,
 				},
 				{
 					Name:      "delete",
@@ -118,9 +119,10 @@ func runCLI() error {
 					Action:    password.DeletePassword,
 				},
 				{
-					Name:   "update",
-					Usage:  usageCommandNotAvaliable,
-					Action: func(c *cli.Context) error { return errCommandNotAvailable },
+					Name:      "update",
+					ArgsUsage: "<email>",
+					Flags:     password.UpdatePasswordFlags,
+					Action:    password.UpdatePassword,
 				},
 			},
 		},
