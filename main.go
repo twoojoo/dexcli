@@ -139,6 +139,7 @@ func runCLI() error {
 				},
 				{
 					Name:      "verify",
+					Usage:     "attempts to verify a password for a user email",
 					ArgsUsage: "<email>",
 					Flags:     password.VerifyPasswordFlags,
 					Action:    password.VerifyPassword,
