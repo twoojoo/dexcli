@@ -23,11 +23,7 @@ var CreateClientFlags []cli.Flag = []cli.Flag{
 		Required: true,
 	},
 	cli.StringFlag{
-		Name:  "client-id, cid",
-		Value: "random UUID",
-	},
-	cli.StringFlag{
-		Name:  "client-secret, csec",
+		Name:  "secret, s",
 		Value: "random string",
 	},
 	cli.StringSliceFlag{
@@ -56,23 +52,18 @@ func CreateClient(c *cli.Context) error {
 		return err
 	}
 
-	clientId := c.String("client-id")
-	if clientId == "random UUID" || clientId == "" {
-		uid, err := uuid.NewUUID()
-		if err != nil {
-			return err
-		}
-
-		clientId = uid.String()
+	id := c.Args().Get(0)
+	if id == "" {
+		return errors.New("client id must be provided as first argument")
 	}
 
-	clientSecret := c.String("client-secret")
+	clientSecret := c.String("secret")
 	if clientSecret == "random string" || clientSecret == "" {
-		clientSecret = utils.RandomString(utils.LettersSet, 15)
+		clientSecret = utils.RandomString(utils.LettersSet, 40)
 	}
 
 	client := &api.Client{
-		Id:           clientId,
+		Id:           id,
 		Secret:       clientSecret,
 		Name:         c.String("name"),
 		RedirectUris: c.StringSlice("redirect-uris"),
