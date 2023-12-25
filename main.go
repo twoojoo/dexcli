@@ -8,6 +8,7 @@ import (
 	"github.com/twoojoo/dexctl/base"
 	"github.com/twoojoo/dexctl/client"
 	"github.com/twoojoo/dexctl/password"
+	"github.com/twoojoo/dexctl/refresh"
 	"github.com/urfave/cli"
 )
 
@@ -141,6 +142,24 @@ func runCLI() error {
 					ArgsUsage: "<email>",
 					Flags:     password.VerifyPasswordFlags,
 					Action:    password.VerifyPassword,
+				},
+			},
+		},
+		{
+			Name:  "refresh",
+			Usage: "refresh-related commands",
+			Subcommands: []cli.Command{
+				{
+					Name:      "list",
+					ArgsUsage: "<user_id>",
+					Flags:     refresh.ListRefreshFlags,
+					Action:    refresh.ListRefresh,
+				},
+				{
+					Name:      "revoke",
+					ArgsUsage: "<client_id> <user_id>",
+					Flags:     refresh.RevokeRefreshFlags,
+					Action:    refresh.RevokeRefresh,
 				},
 			},
 		},
