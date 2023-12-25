@@ -77,17 +77,20 @@ func (a ApplicationHanlder) handleCallback(w http.ResponseWriter, r *http.Reques
 	case http.MethodGet: //Oauth2 flow
 		if errMsg := r.FormValue("error"); errMsg != "" {
 			w.Write(errorPage(errMsg + ": " + r.FormValue("error_description")))
+			go exitWithDelay(1)
 			return
 		}
 
 		code := r.FormValue("code")
 		if code == "" {
 			w.Write(errorPage(fmt.Sprintf("no code in request: %q", r.Form)))
+			go exitWithDelay(1)
 			return
 		}
 
 		if state := r.FormValue("state"); state != a.state {
 			w.Write(errorPage("state mismatch"))
+			go exitWithDelay(1)
 			return
 		}
 
@@ -96,6 +99,7 @@ func (a ApplicationHanlder) handleCallback(w http.ResponseWriter, r *http.Reques
 		refresh := r.FormValue("refresh_token")
 		if refresh == "" {
 			w.Write(errorPage(fmt.Sprintf("no refresh_token in request: %q", r.Form)))
+			go exitWithDelay(1)
 			return
 		}
 
@@ -107,22 +111,26 @@ func (a ApplicationHanlder) handleCallback(w http.ResponseWriter, r *http.Reques
 		token, err = a.oauth2Config.TokenSource(ctx, t).Token()
 	default:
 		http.Error(w, fmt.Sprintf("method not implemented: %s", r.Method), http.StatusBadRequest)
+		go exitWithDelay(1)
 		return
 	}
 
 	if err != nil {
 		w.Write(errorPage(fmt.Sprintf("failed to get token: %v", err)))
+		go exitWithDelay(1)
 		return
 	}
 
 	rawIDToken, ok := token.Extra("id_token").(string)
 	if !ok {
 		w.Write(errorPage("no id_token in token response"))
+		go exitWithDelay(1)
 		return
 	}
 
 	if _, err := a.idTokenVerifier.Verify(r.Context(), rawIDToken); err != nil {
 		w.Write(errorPage(fmt.Sprintf("failed to verify ID token: %v", err)))
+		go exitWithDelay(1)
 		return
 	}
 
@@ -131,13 +139,17 @@ func (a ApplicationHanlder) handleCallback(w http.ResponseWriter, r *http.Reques
 	p, err := utils.PrettifyJSON(token)
 	if err != nil {
 		w.Write(errorPage(fmt.Sprintf("failed to prettify token: %v", err)))
+		go exitWithDelay(1)
 		return
 	}
 
 	fmt.Println(p)
 
-	go func() {
-		time.Sleep(300 * time.Millisecond)
-		os.Exit(0)
-	}()
+	go exitWithDelay(0)
+	return
+}
+
+func exitWithDelay(status int) {
+	time.Sleep(300 * time.Millisecond)
+	os.Exit(status)
 }
