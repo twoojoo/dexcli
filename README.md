@@ -20,6 +20,7 @@ dexctl version [--grpc-url <host:port>]
 
 ```bash
 dexctl signin [--browser <browser>]
+# will open up a browser window (default browser is autodetected in X11)
 ```
 
 ```bash
