@@ -45,6 +45,12 @@ func runCLI() error {
 			Action: base.Verify,
 		},
 		{
+			Name:   "version",
+			Usage:  "get the version of the Dex server",
+			Flags:  base.VersionFlags,
+			Action: base.Version,
+		},
+		{
 			Name:  "connector",
 			Usage: "connector-related commands",
 			Subcommands: []cli.Command{
