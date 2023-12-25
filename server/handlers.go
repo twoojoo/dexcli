@@ -76,18 +76,18 @@ func (a ApplicationHanlder) handleCallback(w http.ResponseWriter, r *http.Reques
 	switch r.Method {
 	case http.MethodGet: //Oauth2 flow
 		if errMsg := r.FormValue("error"); errMsg != "" {
-			http.Error(w, errMsg+": "+r.FormValue("error_description"), http.StatusBadRequest)
+			w.Write(errorPage(errMsg + ": " + r.FormValue("error_description")))
 			return
 		}
 
 		code := r.FormValue("code")
 		if code == "" {
-			http.Error(w, fmt.Sprintf("no code in request: %q", r.Form), http.StatusBadRequest)
+			w.Write(errorPage(fmt.Sprintf("no code in request: %q", r.Form)))
 			return
 		}
 
 		if state := r.FormValue("state"); state != a.state {
-			http.Error(w, "state mismatch", http.StatusBadRequest)
+			w.Write(errorPage("state mismatch"))
 			return
 		}
 
@@ -95,7 +95,7 @@ func (a ApplicationHanlder) handleCallback(w http.ResponseWriter, r *http.Reques
 	case http.MethodPost: // Form request from frontend to refresh a token.
 		refresh := r.FormValue("refresh_token")
 		if refresh == "" {
-			http.Error(w, fmt.Sprintf("no refresh_token in request: %q", r.Form), http.StatusBadRequest)
+			w.Write(errorPage(fmt.Sprintf("no refresh_token in request: %q", r.Form)))
 			return
 		}
 
@@ -111,18 +111,18 @@ func (a ApplicationHanlder) handleCallback(w http.ResponseWriter, r *http.Reques
 	}
 
 	if err != nil {
-		http.Error(w, fmt.Sprintf("failed to get token: %v", err), http.StatusInternalServerError)
+		w.Write(errorPage(fmt.Sprintf("failed to get token: %v", err)))
 		return
 	}
 
 	rawIDToken, ok := token.Extra("id_token").(string)
 	if !ok {
-		http.Error(w, "no id_token in token response", http.StatusInternalServerError)
+		w.Write(errorPage("no id_token in token response"))
 		return
 	}
 
 	if _, err := a.idTokenVerifier.Verify(r.Context(), rawIDToken); err != nil {
-		http.Error(w, fmt.Sprintf("failed to verify ID token: %v", err), http.StatusInternalServerError)
+		w.Write(errorPage(fmt.Sprintf("failed to verify ID token: %v", err)))
 		return
 	}
 
@@ -130,7 +130,7 @@ func (a ApplicationHanlder) handleCallback(w http.ResponseWriter, r *http.Reques
 
 	p, err := utils.PrettifyJSON(token)
 	if err != nil {
-		http.Error(w, fmt.Sprintf("failed to prettify token: %v", err), http.StatusInternalServerError)
+		w.Write(errorPage(fmt.Sprintf("failed to prettify token: %v", err)))
 		return
 	}
 

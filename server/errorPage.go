@@ -1,6 +1,9 @@
 package server
 
-var successPage []byte = []byte(`<!DOCTYPE html>
+import "fmt"
+
+func errorPage(message string) []byte {
+	return []byte(fmt.Sprintf(`<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -177,14 +180,14 @@ var successPage []byte = []byte(`<!DOCTYPE html>
 
 		.theme-navbar__logo-wrap {
 		  display: inline-block;
-		  height: 100%;
+		  height: 100%%;
 		  overflow: hidden;
 		  padding: 10px 15px;
 		  width: 300px;
 		}
 
 		.theme-navbar__logo {
-		  height: 100%;
+		  height: 100%%;
 		  max-height: 25px;
 		}
 
@@ -283,10 +286,11 @@ var successPage []byte = []byte(`<!DOCTYPE html>
 
 
 <div class="theme-panel">
-  <h2 class="theme-heading">Success!</h2>
-  <p>go back to dexctl</p>
+  <h2 class="theme-heading" style="color: darkred">Error</h2>
+  <p>%v</p>
 </div>
 
     </div>
   </body>
-</html>`)
+</html>`, message))
+}
