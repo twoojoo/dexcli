@@ -102,6 +102,12 @@ func runCLI() error {
 			Usage: "password-related commands",
 			Subcommands: []cli.Command{
 				{
+					Name:      "get",
+					ArgsUsage: "<email>",
+					Flags:     password.GetPasswordFlags,
+					Action:    password.GetPassword,
+				},
+				{
 					Name:   "list",
 					Flags:  password.ListPasswordFlags,
 					Action: password.ListPassword,
