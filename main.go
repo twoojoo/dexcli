@@ -87,17 +87,20 @@ func runCLI() error {
 				},
 				{
 					Name:   "create",
+					Usage:  "add a new client",
 					Flags:  client.CreateClientFlags,
 					Action: client.CreateClient,
 				},
 				{
 					Name:      "delete",
+					Usage:     "delete an existing client",
 					ArgsUsage: "<client_id>",
 					Flags:     client.DeleteClientFlags,
 					Action:    client.DeleteClient,
 				},
 				{
 					Name:      "update",
+					Usage:     "update an existing client",
 					ArgsUsage: "<client_id>",
 					Flags:     client.UpdateClientFlags,
 					Action:    client.UpdateClient,
@@ -110,29 +113,34 @@ func runCLI() error {
 			Subcommands: []cli.Command{
 				{
 					Name:      "get",
+					Usage:     "retrieves user settings by its email",
 					ArgsUsage: "<email>",
 					Flags:     password.GetPasswordFlags,
 					Action:    password.GetPassword,
 				},
 				{
 					Name:   "list",
+					Usage:  "lists all users",
 					Flags:  password.ListPasswordFlags,
 					Action: password.ListPassword,
 				},
 				{
 					Name:      "create",
+					Usage:     "add a new user",
 					ArgsUsage: "<email>",
 					Flags:     password.CreatePasswordFlags,
 					Action:    password.CreatePassword,
 				},
 				{
 					Name:      "delete",
+					Usage:     "delete an existing user",
 					ArgsUsage: "<email>",
 					Flags:     password.DeletePasswordFlags,
 					Action:    password.DeletePassword,
 				},
 				{
 					Name:      "update",
+					Usage:     "update an existing user",
 					ArgsUsage: "<email>",
 					Flags:     password.UpdatePasswordFlags,
 					Action:    password.UpdatePassword,
