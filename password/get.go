@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"net/mail"
+	"strings"
 
 	"github.com/dexidp/dex/api/v2"
 	"github.com/twoojoo/dexctl/setup"
@@ -17,6 +18,10 @@ var GetPasswordFlags []cli.Flag = []cli.Flag{
 		Name:  "grpc-url, g",
 		Value: "127.0.0.1:5557",
 		Usage: "gRPC host and port",
+	},
+	cli.StringFlag{
+		Name:     "field, f",
+		Required: false,
 	},
 }
 
@@ -49,6 +54,17 @@ func GetPassword(c *cli.Context) error {
 
 	if password == nil {
 		return errors.New("password not found")
+	}
+
+	field := c.String("field")
+	field = strings.Title(field)
+	if field != "" {
+		if value, ok := utils.GetStructField(*password, field); ok {
+			fmt.Print(value)
+			return nil
+		}
+
+		return fmt.Errorf("field %v not in result", field)
 	}
 
 	p, err := utils.PrettifyJSON(password)
