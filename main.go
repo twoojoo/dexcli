@@ -103,8 +103,8 @@ func runCLI() error {
 			Subcommands: []cli.Command{
 				{
 					Name:   "list",
-					Usage:  usageCommandNotAvaliable,
-					Action: func(c *cli.Context) error { return errCommandNotAvailable },
+					Flags:  password.ListPasswordFlags,
+					Action: password.ListPassword,
 				},
 				{
 					Name:      "create",
@@ -123,6 +123,12 @@ func runCLI() error {
 					ArgsUsage: "<email>",
 					Flags:     password.UpdatePasswordFlags,
 					Action:    password.UpdatePassword,
+				},
+				{
+					Name:      "verify",
+					ArgsUsage: "<email>",
+					Flags:     password.VerifyPasswordFlags,
+					Action:    password.VerifyPassword,
 				},
 			},
 		},
