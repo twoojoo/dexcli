@@ -8,6 +8,12 @@ make install
 
 ### usage
 
+A `Dex` instance must be running. Dex defaults should match `dedctl` ones:
+
+- host: 127.0.0.1
+- web port: 5556
+- grpc port: 5558
+
 ```bash
 dexctl version [--grpc-url <host:port>]
 ```
