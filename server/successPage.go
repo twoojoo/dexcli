@@ -5,9 +5,8 @@ var successPage []byte = []byte(`<!DOCTYPE html>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>dex</title>
+    <title>dexctl</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="theme/favicon.png">
     <style>
 		* {
 		  box-sizing: border-box;

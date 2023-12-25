@@ -8,9 +8,8 @@ func errorPage(message string) []byte {
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>dex</title>
+    <title>dexctl</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="theme/favicon.png">
     <style>
 		* {
 		  box-sizing: border-box;
@@ -286,8 +285,9 @@ func errorPage(message string) []byte {
 
 
 <div class="theme-panel">
-  <h2 class="theme-heading" style="color: darkred">Error</h2>
+  <h4 class="theme-heading" style="color: darkred">Error</h4>
   <p>%v</p>
+  <p>go back to dexctl</p>
 </div>
 
     </div>
