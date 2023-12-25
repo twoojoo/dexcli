@@ -1,6 +1,6 @@
 ## dexctl - a Command Line Interface for [Dex](https://dexidp.io/)
 
-`dexctl can be used both to perform CRUD operations on Dex resources and to test the sign-on process and verify tokens and passwords.
+`dexctl` can be used both to perform CRUD operations on `Dex` resources and to test the sign-on process and verify tokens and passwords.
 
 ### install
 
