@@ -12,7 +12,7 @@ make install
 
 ### usage
 
-A `Dex` instance must be running. `Dex` defaults should match `dexctl` ones:
+A `Dex` instance must be running. `Dex` defaults match `dexctl` ones:
 
 - host: 127.0.0.1
 - web port: 5556
