@@ -1,3 +1,5 @@
+## dexctl - a Command Line Interface for [Dex](https://dexidp.io/)
+
 ### install
 
 ```bash
@@ -8,7 +10,7 @@ make install
 
 ### usage
 
-A `Dex` instance must be running. Dex defaults should match `dedctl` ones:
+A `Dex` instance must be running. `Dex` defaults should match `dexctl` ones:
 
 - host: 127.0.0.1
 - web port: 5556
