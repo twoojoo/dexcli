@@ -112,9 +112,10 @@ func runCLI() error {
 					Action: password.CreatePassword,
 				},
 				{
-					Name:   "delete",
-					Usage:  usageCommandNotAvaliable,
-					Action: func(c *cli.Context) error { return errCommandNotAvailable },
+					Name:      "delete",
+					ArgsUsage: "<email>",
+					Flags:     password.DeletePasswordFlags,
+					Action:    password.DeletePassword,
 				},
 				{
 					Name:   "update",

@@ -3,6 +3,7 @@ package password
 import (
 	"context"
 	"fmt"
+	"net/mail"
 
 	"github.com/dexidp/dex/api/v2"
 	"github.com/google/uuid"
@@ -16,10 +17,6 @@ var CreatePasswordFlags []cli.Flag = []cli.Flag{
 		Name:  "grpc-url, g",
 		Value: "127.0.0.1:5557",
 		Usage: "gRPC host and port",
-	},
-	cli.StringFlag{
-		Name:     "email, e",
-		Required: true,
 	},
 	cli.StringFlag{
 		Name:     "username, u",
@@ -54,8 +51,14 @@ func CreatePassword(c *cli.Context) error {
 		id = uid.String()
 	}
 
+	email := c.Args().Get(0)
+	_, err = mail.ParseAddress(email)
+	if err != nil {
+		return err
+	}
+
 	pwd := &api.Password{
-		Email:    c.String("email"),
+		Email:    email,
 		Hash:     []byte(c.String("hash")),
 		Username: c.String("username"),
 		UserId:   id,
