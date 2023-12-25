@@ -11,31 +11,15 @@ import (
 	"github.com/urfave/cli"
 )
 
-var UpdateClientFlags []cli.Flag = []cli.Flag{
+var DeleteClientFlags []cli.Flag = []cli.Flag{
 	cli.StringFlag{
 		Name:  "grpc-url, g",
 		Value: "127.0.0.1:5557",
 		Usage: "gRPC host and port",
 	},
-	cli.StringFlag{
-		Name:     "name, n",
-		Required: false,
-	},
-	cli.StringSliceFlag{
-		Name:     "redirect-uris, r",
-		Required: false,
-	},
-	cli.StringFlag{
-		Name:     "logo-url, l",
-		Required: false,
-	},
-	cli.StringSliceFlag{
-		Name:     "trusted-peers, t",
-		Required: false,
-	},
 }
 
-func UpdateClient(c *cli.Context) error {
+func DeleteClient(c *cli.Context) error {
 	ctx := context.Background()
 
 	grpc, err := setup.SetupGrpcClient(ctx, c)
@@ -48,12 +32,8 @@ func UpdateClient(c *cli.Context) error {
 		return errors.New("client id must be provided as first argument")
 	}
 
-	resp, err := grpc.UpdateClient(ctx, &api.UpdateClientReq{
-		Id:           id,
-		RedirectUris: c.StringSlice("redirect-uris"),
-		TrustedPeers: c.StringSlice("trusted-peers"),
-		Name:         c.String("name"),
-		LogoUrl:      c.String("logo-url"),
+	resp, err := grpc.DeleteClient(ctx, &api.DeleteClientReq{
+		Id: id,
 	})
 
 	if err != nil {

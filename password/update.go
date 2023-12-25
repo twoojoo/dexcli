@@ -2,6 +2,7 @@ package password
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"net/mail"
 
@@ -49,6 +50,10 @@ func UpdatePassword(c *cli.Context) error {
 
 	if err != nil {
 		return err
+	}
+
+	if resp.NotFound {
+		return errors.New("password not found")
 	}
 
 	p, err := utils.PrettifyJSON(resp)

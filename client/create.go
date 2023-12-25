@@ -2,6 +2,7 @@ package client
 
 import (
 	"context"
+	"errors"
 	"fmt"
 
 	"github.com/dexidp/dex/api/v2"
@@ -83,6 +84,10 @@ func CreateClient(c *cli.Context) error {
 	resp, err := grpc.CreateClient(ctx, &api.CreateClientReq{Client: client})
 	if err != nil {
 		return err
+	}
+
+	if resp.AlreadyExists {
+		return errors.New("client already exists")
 	}
 
 	p, err := utils.PrettifyJSON(resp)

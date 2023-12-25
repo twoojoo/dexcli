@@ -86,9 +86,10 @@ func runCLI() error {
 					Action: client.CreateClient,
 				},
 				{
-					Name:   "delete",
-					Usage:  usageCommandNotAvaliable,
-					Action: func(c *cli.Context) error { return errCommandNotAvailable },
+					Name:      "delete",
+					ArgsUsage: "<client_id>",
+					Flags:     client.DeleteClientFlags,
+					Action:    client.DeleteClient,
 				},
 				{
 					Name:      "update",

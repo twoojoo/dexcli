@@ -47,6 +47,10 @@ func VerifyPassword(c *cli.Context) error {
 		return err
 	}
 
+	if resp.NotFound {
+		return errors.New("password not found")
+	}
+
 	if !resp.Verified {
 		return errors.New("failed to verify password")
 	}

@@ -2,6 +2,7 @@ package password
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"net/mail"
 
@@ -67,6 +68,10 @@ func CreatePassword(c *cli.Context) error {
 	resp, err := grpc.CreatePassword(ctx, &api.CreatePasswordReq{Password: pwd})
 	if err != nil {
 		return err
+	}
+
+	if resp.AlreadyExists {
+		return errors.New("password already exists")
 	}
 
 	p, err := utils.PrettifyJSON(resp)
