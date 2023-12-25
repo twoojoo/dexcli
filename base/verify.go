@@ -40,14 +40,19 @@ type Claims struct {
 func Verify(c *cli.Context) error {
 	ctx := context.Background()
 
-	verifier, _, err := setup.SetupProvider(ctx, c)
+	clientID := c.Args().Get(0)
+	if clientID == "" {
+		return errors.New("a token must be provided as second argument")
+	}
+
+	verifier, _, err := setup.SetupProvider(ctx, clientID, c)
 	if err != nil {
 		return err
 	}
 
-	rawIDToken := c.Args().First()
+	rawIDToken := c.Args().Get(1)
 	if rawIDToken == "" {
-		return errors.New("a token must be provided as argument")
+		return errors.New("a token must be provided as second argument")
 	}
 
 	idToken, err := verifier.Verify(ctx, rawIDToken)

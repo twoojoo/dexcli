@@ -2,6 +2,7 @@ package base
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"log"
 	"time"
@@ -22,19 +23,15 @@ var SigninFlags []cli.Flag = []cli.Flag{
 		Value: 3000,
 	},
 	cli.StringFlag{
-		Name:  "client-id, cid",
-		Value: "example-app",
-	},
-	cli.StringFlag{
-		Name:  "client-secret, csec",
+		Name:  "secret, s",
 		Value: "example-app-secret",
 	},
 	cli.StringFlag{
 		Name:  "state, t",
-		Value: "",
+		Value: "default-state",
 	},
 	cli.StringSliceFlag{
-		Name:  "scopes, s",
+		Name:  "scope",
 		Value: &cli.StringSlice{"profile", "email"},
 	},
 	cli.StringFlag{
@@ -46,7 +43,12 @@ var SigninFlags []cli.Flag = []cli.Flag{
 func Signin(c *cli.Context) error {
 	ctx := context.Background()
 
-	verifier, config, err := setup.SetupProvider(ctx, c)
+	clientID := c.Args().Get(0)
+	if clientID == "" {
+		return errors.New("client id must be provided as first argument")
+	}
+
+	verifier, config, err := setup.SetupProvider(ctx, clientID, c)
 	if err != nil {
 		return err
 	}

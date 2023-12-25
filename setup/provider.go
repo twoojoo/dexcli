@@ -17,13 +17,13 @@ type ProviderParams struct {
 	Scopes       []string
 }
 
-func SetupProvider(ctx context.Context, c *cli.Context) (*oidc.IDTokenVerifier, oauth2.Config, error) {
+func SetupProvider(ctx context.Context, clientID string, c *cli.Context) (*oidc.IDTokenVerifier, oauth2.Config, error) {
 	values := ProviderParams{
 		DexURL:       c.String("dex-base-url"),
 		Port:         c.Uint("port"),
-		ClientID:     c.String("client-id"),
-		ClientSecret: c.String("client-secret"),
-		Scopes:       c.StringSlice("scopes"),
+		ClientID:     clientID,
+		ClientSecret: c.String("secret"),
+		Scopes:       c.StringSlice("scope"),
 	}
 
 	issuer := fmt.Sprintf("%v/dex", values.DexURL)

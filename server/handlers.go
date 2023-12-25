@@ -2,9 +2,6 @@ package server
 
 import (
 	"context"
-	"encoding/base64"
-	"encoding/json"
-	"errors"
 	"fmt"
 	"log"
 	"net/http"
@@ -61,38 +58,6 @@ func (a ApplicationHanlder) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (a ApplicationHanlder) authorizationMiddleware(r *http.Request) (string, error) {
-	var userClaims UserClaimsJWT
-	var userId string
-
-	rawIDToken := r.URL.Query().Get("token")
-	if rawIDToken == "" {
-		return userId, errors.New("missing token")
-	}
-
-	idToken, err := a.idTokenVerifier.Verify(r.Context(), rawIDToken)
-	if err != nil {
-		return userId, err
-	}
-
-	if err := idToken.Claims(&userClaims); err != nil {
-		return userId, err
-	}
-
-	if !userClaims.EmailVerified {
-		return userId, errors.New("email not verified")
-	}
-
-	userId, err = decodeBase64(userClaims.Sub)
-	if err != nil {
-		return userId, err
-	}
-
-	log.Printf("%+v\n", userClaims)
-
-	return userId, nil
-}
-
 func (a ApplicationHanlder) handleExample(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("you're the user with id"))
 }
@@ -125,8 +90,6 @@ func (a ApplicationHanlder) handleCallback(w http.ResponseWriter, r *http.Reques
 			http.Error(w, "state mismatch", http.StatusBadRequest)
 			return
 		}
-
-		/// CREATE USER RECORD IN MAIN DATABASE HERE??
 
 		token, err = a.oauth2Config.Exchange(ctx, code)
 	case http.MethodPost: // Form request from frontend to refresh a token.
@@ -163,12 +126,7 @@ func (a ApplicationHanlder) handleCallback(w http.ResponseWriter, r *http.Reques
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(AuthorizationResponse{
-		ExpiresAt:    token.Expiry.Unix(),
-		IDToken:      rawIDToken,
-		RefreshToken: token.RefreshToken,
-	})
+	w.Write(successPage)
 
 	p, err := utils.PrettifyJSON(token)
 	if err != nil {
@@ -182,13 +140,4 @@ func (a ApplicationHanlder) handleCallback(w http.ResponseWriter, r *http.Reques
 		time.Sleep(300 * time.Millisecond)
 		os.Exit(0)
 	}()
-}
-
-func decodeBase64(encoded string) (string, error) {
-	rawDecodedText, err := base64.StdEncoding.DecodeString(encoded)
-	if err != nil {
-		return "", err
-	}
-
-	return string(rawDecodedText), nil
 }
