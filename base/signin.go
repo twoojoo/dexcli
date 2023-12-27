@@ -20,7 +20,7 @@ var SigninFlags []cli.Flag = []cli.Flag{
 	},
 	cli.UintFlag{
 		Name:  "port, p",
-		Value: 3000,
+		Value: 5555,
 	},
 	cli.StringFlag{
 		Name:  "secret, s",
