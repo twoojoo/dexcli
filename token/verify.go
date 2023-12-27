@@ -1,4 +1,4 @@
-package base
+package token
 
 import (
 	"context"
@@ -10,25 +10,14 @@ import (
 	"github.com/urfave/cli"
 )
 
-var VerifyFlags []cli.Flag = []cli.Flag{
+var VerifyTokenFlags []cli.Flag = []cli.Flag{
 	cli.StringFlag{
 		Name:  "dex-base-url",
 		Value: "http://127.0.0.1:5556",
 	},
 }
 
-type Claims struct {
-	AtHash        string `json:"at_hash"`
-	Aud           string `json:"aud"`
-	Email         string `json:"email"`
-	EmailVerified bool   `json:"email_verified"`
-	Iat           int    `json:"iat"`
-	Iss           string `json:"iss"`
-	Name          string `json:"name"`
-	Sub           string `json:"sub"`
-}
-
-func Verify(c *cli.Context) error {
+func VerifyToken(c *cli.Context) error {
 	ctx := context.Background()
 
 	clientID := c.Args().Get(0)

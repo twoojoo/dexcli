@@ -9,6 +9,7 @@ import (
 	"github.com/twoojoo/dexctl/client"
 	"github.com/twoojoo/dexctl/password"
 	"github.com/twoojoo/dexctl/refresh"
+	"github.com/twoojoo/dexctl/token"
 	"github.com/urfave/cli"
 )
 
@@ -33,22 +34,28 @@ func runCLI() error {
 
 	app.Commands = []cli.Command{
 		{
-			Name:   "signin",
-			Usage:  "Performs a sign-in (opens up a browser page)",
-			Flags:  base.SigninFlags,
-			Action: base.Signin,
-		},
-		{
-			Name:   "verify",
-			Usage:  "Attempts to verify an access token or ID token returning the token claims",
-			Flags:  base.VerifyFlags,
-			Action: base.Verify,
+			Name:   "signon",
+			Usage:  "Performs a sign-on (opens up a browser page)",
+			Flags:  base.SignonFlags,
+			Action: base.Signon,
 		},
 		{
 			Name:   "version",
 			Usage:  "Get the version of the Dex server",
 			Flags:  base.VersionFlags,
 			Action: base.Version,
+		},
+		{
+			Name:  "token",
+			Usage: "token-related commands",
+			Subcommands: []cli.Command{
+				{
+					Name:   "verify",
+					Usage:  "Attempts to verify an access token or ID token returning the token claims",
+					Flags:  token.VerifyTokenFlags,
+					Action: token.VerifyToken,
+				},
+			},
 		},
 		// {
 		// 	Name:  "connector",

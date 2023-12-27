@@ -13,7 +13,7 @@ import (
 	"github.com/urfave/cli"
 )
 
-var SigninFlags []cli.Flag = []cli.Flag{
+var SignonFlags []cli.Flag = []cli.Flag{
 	cli.StringFlag{
 		Name:  "dex-base-url",
 		Value: "http://127.0.0.1:5556",
@@ -46,7 +46,7 @@ var SigninFlags []cli.Flag = []cli.Flag{
 	},
 }
 
-func Signin(c *cli.Context) error {
+func Signon(c *cli.Context) error {
 	ctx := context.Background()
 
 	clientID := c.Args().Get(0)
