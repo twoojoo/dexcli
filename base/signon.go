@@ -28,7 +28,7 @@ var SignonFlags []cli.Flag = []cli.Flag{
 	},
 	cli.StringFlag{
 		Name:  "state, t",
-		Value: "default-state",
+		Value: "example-state",
 	},
 	cli.BoolFlag{
 		Name: "userinfo, u",
