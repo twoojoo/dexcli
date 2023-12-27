@@ -15,8 +15,9 @@ make install
 A `Dex` instance must be running. `Dex` defaults match `dexctl` ones:
 
 - host: 127.0.0.1
-- web port: 5556
-- grpc port: 5558
+- App port: 5555
+- Dex web port: 5556
+- Dex grpc port: 5558
 
 `help` flag available for every command
 ```bash
@@ -28,9 +29,11 @@ dexctl version [--grpc-url <host:port>]
 ```
 
 ```bash
-dexctl signin [--browser <browser>]
+dexctl signon [--browser <browser>]
 # will open up a browser window (default browser is autodetected in X11)
 ```
+
+#### token
 
 ```bash
 dexctl verify <token> --client-id <id>
