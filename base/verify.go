@@ -42,17 +42,17 @@ func Verify(c *cli.Context) error {
 
 	clientID := c.Args().Get(0)
 	if clientID == "" {
-		return errors.New("a token must be provided as second argument")
+		return errors.New("the client_id must be provided as second argument")
 	}
 
-	verifier, _, err := setup.SetupProvider(ctx, clientID, c)
+	_, verifier, _, err := setup.SetupProvider(ctx, clientID, c)
 	if err != nil {
 		return err
 	}
 
 	rawIDToken := c.Args().Get(1)
 	if rawIDToken == "" {
-		return errors.New("a token must be provided as second argument")
+		return errors.New("the id_token must be provided as second argument")
 	}
 
 	idToken, err := verifier.Verify(ctx, rawIDToken)

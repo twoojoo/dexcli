@@ -40,7 +40,7 @@ func runCLI() error {
 		},
 		{
 			Name:   "verify",
-			Usage:  "Attempts to verify an access token or ID token",
+			Usage:  "Attempts to verify an access token or ID token returning the token claims",
 			Flags:  base.VerifyFlags,
 			Action: base.Verify,
 		},

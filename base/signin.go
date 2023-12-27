@@ -30,6 +30,9 @@ var SigninFlags []cli.Flag = []cli.Flag{
 		Name:  "state, t",
 		Value: "default-state",
 	},
+	cli.BoolFlag{
+		Name: "userinfo, u",
+	},
 	cli.StringSliceFlag{
 		Name:  "scope",
 		Value: &cli.StringSlice{"profile", "email"},
@@ -48,7 +51,7 @@ func Signin(c *cli.Context) error {
 		return errors.New("client id must be provided as first argument")
 	}
 
-	verifier, config, err := setup.SetupProvider(ctx, clientID, c)
+	provider, verifier, config, err := setup.SetupProvider(ctx, clientID, c)
 	if err != nil {
 		return err
 	}
@@ -69,7 +72,7 @@ func Signin(c *cli.Context) error {
 		}
 	}()
 
-	err = server.RunServer(ctx, c, verifier, config, c.String("state"))
+	err = server.RunServer(ctx, c, provider, verifier, config, c.String("state"))
 	if err != nil {
 		return err
 	}

@@ -38,8 +38,10 @@ type UserClaimsJWT struct {
 
 type ApplicationHanlder struct {
 	state           string
+	provider        *oidc.Provider
 	oauth2Config    oauth2.Config
 	idTokenVerifier *oidc.IDTokenVerifier
+	userinfo        bool
 }
 
 func (a ApplicationHanlder) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -112,6 +114,30 @@ func (a ApplicationHanlder) handleCallback(w http.ResponseWriter, r *http.Reques
 	default:
 		http.Error(w, fmt.Sprintf("method not implemented: %s", r.Method), http.StatusBadRequest)
 		go exitWithDelay(1)
+		return
+	}
+
+	if a.userinfo {
+		tokenSource := a.oauth2Config.TokenSource(ctx, token)
+		userInfo, err := a.provider.UserInfo(ctx, tokenSource)
+		if err != nil {
+			http.Error(w, fmt.Sprintf("failed to fetch user info: %e", err), http.StatusInternalServerError)
+			go exitWithDelay(1)
+			return
+		}
+
+		w.Write(successPage)
+
+		p, err := utils.PrettifyJSON(userInfo)
+		if err != nil {
+			w.Write(errorPage(fmt.Sprintf("failed to prettify userinfo: %v", err)))
+			go exitWithDelay(1)
+			return
+		}
+
+		fmt.Println(p)
+
+		go exitWithDelay(0)
 		return
 	}
 

@@ -17,7 +17,7 @@ type ProviderParams struct {
 	Scopes       []string
 }
 
-func SetupProvider(ctx context.Context, clientID string, c *cli.Context) (*oidc.IDTokenVerifier, oauth2.Config, error) {
+func SetupProvider(ctx context.Context, clientID string, c *cli.Context) (*oidc.Provider, *oidc.IDTokenVerifier, oauth2.Config, error) {
 	values := ProviderParams{
 		DexURL:       c.String("dex-base-url"),
 		Port:         c.Uint("port"),
@@ -30,7 +30,7 @@ func SetupProvider(ctx context.Context, clientID string, c *cli.Context) (*oidc.
 
 	provider, err := oidc.NewProvider(ctx, issuer)
 	if err != nil {
-		return nil, oauth2.Config{}, err
+		return nil, nil, oauth2.Config{}, err
 	}
 
 	// Create an ID token parser.
@@ -45,5 +45,5 @@ func SetupProvider(ctx context.Context, clientID string, c *cli.Context) (*oidc.
 		Scopes:       append([]string{oidc.ScopeOpenID}, values.Scopes...),
 	}
 
-	return idTokenVerifier, oauth2Config, nil
+	return provider, idTokenVerifier, oauth2Config, nil
 }
