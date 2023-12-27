@@ -36,7 +36,7 @@ dexctl signon [--browser <browser>]
 #### token
 
 ```bash
-dexctl verify <token> --client-id <id>
+dexctl token verify <token> --client-id <id>
 ```
 
 #### clients
