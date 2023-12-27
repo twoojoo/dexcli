@@ -93,10 +93,11 @@ func runCLI() error {
 					Action: func(c *cli.Context) error { return errCommandNotAvailable },
 				},
 				{
-					Name:   "create",
-					Usage:  "Add a new client",
-					Flags:  client.CreateClientFlags,
-					Action: client.CreateClient,
+					Name:      "create",
+					Usage:     "Add a new client",
+					ArgsUsage: "<client_id>",
+					Flags:     client.CreateClientFlags,
+					Action:    client.CreateClient,
 				},
 				{
 					Name:      "delete",

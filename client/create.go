@@ -53,7 +53,7 @@ func CreateClient(c *cli.Context) error {
 
 	id := c.Args().Get(0)
 	if id == "" {
-		return errors.New("client id must be provided as first argument")
+		return errors.New("client_id must be provided as first argument")
 	}
 
 	clientSecret := c.String("secret")
