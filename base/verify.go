@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"strings"
 
 	"github.com/twoojoo/dexctl/setup"
 	"github.com/twoojoo/dexctl/utils"
@@ -15,14 +14,6 @@ var VerifyFlags []cli.Flag = []cli.Flag{
 	cli.StringFlag{
 		Name:  "dex-base-url",
 		Value: "http://127.0.0.1:5556",
-	},
-	cli.StringFlag{
-		Name:  "client-id, cid",
-		Value: "example-app",
-	},
-	cli.StringFlag{
-		Name:     "field, f",
-		Required: false,
 	},
 }
 
@@ -60,22 +51,17 @@ func Verify(c *cli.Context) error {
 		return err
 	}
 
-	claims := Claims{}
-	if err := token.Claims(&claims); err != nil {
-		return err
-	}
+	// field := strings.Title(c.String("field"))
+	// if field != "" {
+	// 	if value, ok := utils.GetStructField(claims, field); ok {
+	// 		fmt.Print(value)
+	// 		return nil
+	// 	}
 
-	field := strings.Title(c.String("field"))
-	if field != "" {
-		if value, ok := utils.GetStructField(claims, field); ok {
-			fmt.Print(value)
-			return nil
-		}
+	// 	return fmt.Errorf("field %v not in result", field)
+	// }
 
-		return fmt.Errorf("field %v not in result", field)
-	}
-
-	p, err := utils.PrettifyJSON(claims)
+	p, err := utils.PrettifyJSON(token)
 	if err != nil {
 		return err
 	}
