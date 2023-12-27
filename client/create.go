@@ -26,7 +26,7 @@ var CreateClientFlags []cli.Flag = []cli.Flag{
 		Value: "random string",
 	},
 	cli.StringSliceFlag{
-		Name:  "redirect-uris, r",
+		Name:  "redirect-uri, r",
 		Value: &cli.StringSlice{"http://127.0.0.1:3000/callback"},
 	},
 	cli.StringFlag{
