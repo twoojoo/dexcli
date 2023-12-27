@@ -27,14 +27,14 @@ var CreateClientFlags []cli.Flag = []cli.Flag{
 	},
 	cli.StringSliceFlag{
 		Name:  "redirect-uri, r",
-		Value: &cli.StringSlice{"http://127.0.0.1:3000/callback"},
+		Value: &cli.StringSlice{"http://127.0.0.1:5555/callback"},
 	},
 	cli.StringFlag{
 		Name:     "logo-url, l",
 		Required: false,
 	},
 	cli.StringSliceFlag{
-		Name:     "trusted-peers, t",
+		Name:     "trusted-peer, t",
 		Required: false,
 	},
 	cli.BoolFlag{
@@ -65,9 +65,9 @@ func CreateClient(c *cli.Context) error {
 		Id:           id,
 		Secret:       clientSecret,
 		Name:         c.String("name"),
-		RedirectUris: c.StringSlice("redirect-uris"),
+		RedirectUris: c.StringSlice("redirect-uri"),
 		LogoUrl:      c.String("logo-url"),
-		TrustedPeers: c.StringSlice("trusted-peers"),
+		TrustedPeers: c.StringSlice("trusted-peer"),
 		Public:       c.Bool("public"),
 	}
 
