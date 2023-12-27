@@ -51,16 +51,6 @@ func Verify(c *cli.Context) error {
 		return err
 	}
 
-	// field := strings.Title(c.String("field"))
-	// if field != "" {
-	// 	if value, ok := utils.GetStructField(claims, field); ok {
-	// 		fmt.Print(value)
-	// 		return nil
-	// 	}
-
-	// 	return fmt.Errorf("field %v not in result", field)
-	// }
-
 	p, err := utils.PrettifyJSON(token)
 	if err != nil {
 		return err
