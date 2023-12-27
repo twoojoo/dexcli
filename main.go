@@ -47,7 +47,7 @@ func runCLI() error {
 		},
 		{
 			Name:  "token",
-			Usage: "token-related commands",
+			Usage: "Token-related commands",
 			Subcommands: []cli.Command{
 				{
 					Name:   "verify",
