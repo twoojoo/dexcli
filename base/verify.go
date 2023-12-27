@@ -50,18 +50,18 @@ func Verify(c *cli.Context) error {
 		return err
 	}
 
-	rawIDToken := c.Args().Get(1)
-	if rawIDToken == "" {
-		return errors.New("the id_token must be provided as second argument")
+	rawToken := c.Args().Get(1)
+	if rawToken == "" {
+		return errors.New("the token must be provided as second argument")
 	}
 
-	idToken, err := verifier.Verify(ctx, rawIDToken)
+	token, err := verifier.Verify(ctx, rawToken)
 	if err != nil {
 		return err
 	}
 
 	claims := Claims{}
-	if err := idToken.Claims(&claims); err != nil {
+	if err := token.Claims(&claims); err != nil {
 		return err
 	}
 

@@ -33,6 +33,9 @@ var SigninFlags []cli.Flag = []cli.Flag{
 	cli.BoolFlag{
 		Name: "userinfo, u",
 	},
+	cli.BoolFlag{
+		Name: "offline-access, o",
+	},
 	cli.StringSliceFlag{
 		Name:  "scope",
 		Value: &cli.StringSlice{"profile", "email"},

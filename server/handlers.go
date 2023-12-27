@@ -163,6 +163,7 @@ func (a ApplicationHanlder) handleCallback(w http.ResponseWriter, r *http.Reques
 	w.Write(successPage)
 
 	p, err := utils.PrettifyJSON(token)
+	fmt.Println("id_token:", rawIDToken)
 	if err != nil {
 		w.Write(errorPage(fmt.Sprintf("failed to prettify token: %v", err)))
 		go exitWithDelay(1)

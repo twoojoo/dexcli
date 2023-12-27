@@ -3,6 +3,7 @@ package setup
 import (
 	"context"
 	"fmt"
+	"slices"
 
 	"github.com/coreos/go-oidc/v3/oidc"
 	"github.com/urfave/cli"
@@ -24,6 +25,10 @@ func SetupProvider(ctx context.Context, clientID string, c *cli.Context) (*oidc.
 		ClientID:     clientID,
 		ClientSecret: c.String("secret"),
 		Scopes:       c.StringSlice("scope"),
+	}
+
+	if c.Bool("offline-access") && !slices.Contains(values.Scopes, "offline_access") {
+		values.Scopes = append(values.Scopes, "offline_access")
 	}
 
 	issuer := fmt.Sprintf("%v/dex", values.DexURL)
