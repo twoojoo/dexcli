@@ -4,10 +4,8 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"net/mail"
 
 	"github.com/dexidp/dex/api/v2"
-	"github.com/google/uuid"
 	"github.com/twoojoo/dexctl/setup"
 	"github.com/twoojoo/dexctl/utils"
 	"github.com/urfave/cli"
@@ -29,31 +27,29 @@ var CreatePasswordFlags []cli.Flag = []cli.Flag{
 		Value: "$2a$10$2b2cU8CPhOTaGrs1HRQuAueS7JTT5ZHsHSzYiFPm1leZck7Mc8T4W",
 	},
 	cli.StringFlag{
+		Name:     "email, e",
+		Required: true,
+	},
+	cli.StringFlag{
 		Name:  "id, i",
-		Value: "random UUID",
+		Value: utils.RandUUIDFlag,
 	},
 }
 
 func CreatePassword(c *cli.Context) error {
 	ctx := context.Background()
 
-	grpc, err := setup.SetupGrpcClient(ctx, c)
+	id, err := utils.ParseRandomUUID(c.String("id"))
 	if err != nil {
 		return err
 	}
 
-	id := c.String("id")
-	if id == "random UUID" || id == "" {
-		uid, err := uuid.NewUUID()
-		if err != nil {
-			return err
-		}
-
-		id = uid.String()
+	email, err := utils.ParseEmail(c.String("email"))
+	if err != nil {
+		return err
 	}
 
-	email := c.Args().Get(0)
-	_, err = mail.ParseAddress(email)
+	grpc, err := setup.SetupGrpcClient(ctx, c)
 	if err != nil {
 		return err
 	}

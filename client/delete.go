@@ -22,20 +22,17 @@ var DeleteClientFlags []cli.Flag = []cli.Flag{
 func DeleteClient(c *cli.Context) error {
 	ctx := context.Background()
 
-	grpc, err := setup.SetupGrpcClient(ctx, c)
-	if err != nil {
-		return err
-	}
-
 	id := c.Args().Get(0)
 	if id == "" {
 		return errors.New("client id must be provided as first argument")
 	}
 
-	resp, err := grpc.DeleteClient(ctx, &api.DeleteClientReq{
-		Id: id,
-	})
+	grpc, err := setup.SetupGrpcClient(ctx, c)
+	if err != nil {
+		return err
+	}
 
+	resp, err := grpc.DeleteClient(ctx, &api.DeleteClientReq{Id: id})
 	if err != nil {
 		return err
 	}

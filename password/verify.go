@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"net/mail"
 
 	"github.com/dexidp/dex/api/v2"
 	"github.com/twoojoo/dexctl/setup"
@@ -23,13 +22,12 @@ var VerifyPasswordFlags []cli.Flag = []cli.Flag{
 func VerifyPassword(c *cli.Context) error {
 	ctx := context.Background()
 
-	grpc, err := setup.SetupGrpcClient(ctx, c)
+	email, err := utils.ParseEmail(c.Args().Get(0))
 	if err != nil {
 		return err
 	}
 
-	email := c.Args().Get(0)
-	_, err = mail.ParseAddress(email)
+	grpc, err := setup.SetupGrpcClient(ctx, c)
 	if err != nil {
 		return err
 	}
@@ -43,7 +41,6 @@ func VerifyPassword(c *cli.Context) error {
 		Email:    email,
 		Password: password,
 	})
-
 	if err != nil {
 		return err
 	}

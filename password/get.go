@@ -23,19 +23,17 @@ var GetPasswordFlags []cli.Flag = []cli.Flag{
 func GetPassword(c *cli.Context) error {
 	ctx := context.Background()
 
+	email, err := utils.ParseEmail(c.Args().Get(0))
+	if err != nil {
+		return err
+	}
+
 	grpc, err := setup.SetupGrpcClient(ctx, c)
 	if err != nil {
 		return err
 	}
 
 	resp, err := grpc.ListPasswords(ctx, &api.ListPasswordReq{})
-
-	if err != nil {
-		return err
-	}
-
-	email := c.Args().Get(0)
-	_, err = mail.ParseAddress(email)
 	if err != nil {
 		return err
 	}
