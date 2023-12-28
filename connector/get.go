@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"net/mail"
 
 	"github.com/dexidp/dex/api/v2"
 	"github.com/twoojoo/dexctl/setup"
@@ -23,35 +22,34 @@ var GetPasswordFlags []cli.Flag = []cli.Flag{
 func GetPassword(c *cli.Context) error {
 	ctx := context.Background()
 
+	id := c.Args().Get(0)
+	if id == "" {
+		return errors.New("client id must be provided as first argument")
+	}
+
 	grpc, err := setup.SetupGrpcClient(ctx, c)
 	if err != nil {
 		return err
 	}
 
-	resp, err := grpc.ListPasswords(ctx, &api.ListPasswordReq{})
+	resp, err := grpc.ListConnectors(ctx, &api.ListConnectorReq{})
 
 	if err != nil {
 		return err
 	}
 
-	email := c.Args().Get(0)
-	_, err = mail.ParseAddress(email)
-	if err != nil {
-		return err
-	}
-
-	var password *api.Password = nil
-	for _, p := range resp.Passwords {
-		if p.Email == email {
-			password = p
+	var connector *api.Connector = nil
+	for _, c := range resp.Connectors {
+		if p.ID == id {
+			connector = c
 		}
 	}
 
-	if password == nil {
+	if connector == nil {
 		return errors.New("password not found")
 	}
 
-	p, err := utils.PrettifyJSON(password)
+	p, err := utils.PrettifyJSON(connector)
 	if err != nil {
 		return err
 	}
