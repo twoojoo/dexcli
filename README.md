@@ -42,7 +42,7 @@ dexctl token verify <token> --client-id <id>
 #### clients
 
 ```bash
-dexctl client create <id> --name <name> --secret <secret>  --redirect-uri <uri> [--grpc-url <host:port>]
+dexctl client create <id> --name <name> --secret <secret> --redirect-uri <uri> [--grpc-url <host:port>]
 ```
 
 ```bash
