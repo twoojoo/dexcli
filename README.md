@@ -37,7 +37,7 @@ dexctl signon <client_id> -s <client_secret> --scope <scope1> --scope <scope2> -
 #### token
 
 ```bash
-dexctl token verify <token> --client-id <id>
+dexctl token verify <client_id> <token>
 ```
 
 #### clients
