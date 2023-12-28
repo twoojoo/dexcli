@@ -30,7 +30,7 @@ dexctl version [--grpc-url <host:port>]
 ```
 
 ```bash
-dexctl signon <client_id> -s <client_secret> --scope <scope1> --scope <scope2> --offine-access [--browser <browser>]
+dexctl signon <client_id> -s <client_secret> [--scope <scope1> --scope <scope2> --offine-access --browser <browser>]
 # will open up a browser window (default browser is autodetected in X11)
 ```
 
@@ -43,11 +43,11 @@ dexctl token verify <client_id> <token>
 #### clients
 
 ```bash
-dexctl client create <id> --name <name> --secret <secret> --redirect-uri <uri> [--grpc-url <host:port>]
+dexctl client create <id> --name <name> [--secret <secret> --redirect-uri <uri> --grpc-url <host:port>]
 ```
 
 ```bash
-dexctl client update <id> --name <new-name> [--grpc-url <host:port>]
+dexctl client update <id> [--name <new-name> --grpc-url <host:port>]
 ```
 
 ```bash
@@ -65,11 +65,11 @@ dexctl password list [--grpc-url <host:port>]
 ```
 
 ```bash
-dexctl password create <email> --username <username> --hash <hash> [--grpc-url <host:port>]
+dexctl password create --email <email> --username <username> --hash <hash> [--grpc-url <host:port>]
 ```
 
 ```bash
-dexctl password update <email> --username <new-username> --hash <new-hash> [--grpc-url <host:port>]
+dexctl password update <email> [--username <new-username> --hash <new-hash> --grpc-url <host:port>]
 ```
 
 ```bash
