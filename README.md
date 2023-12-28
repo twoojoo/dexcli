@@ -26,6 +26,7 @@ dexctl --help
 
 ```bash
 dexctl version [--grpc-url <host:port>]
+# gets Dex server version
 ```
 
 ```bash
