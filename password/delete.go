@@ -28,8 +28,7 @@ func DeletePassword(c *cli.Context) error {
 		return err
 	}
 
-	email := c.Args().Get(0)
-	_, err = mail.ParseAddress(email)
+	email, err := utils.ParseEmail(c.Args().Get(0))
 	if err != nil {
 		return err
 	}

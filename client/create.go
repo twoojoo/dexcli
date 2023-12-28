@@ -18,12 +18,16 @@ var CreateClientFlags []cli.Flag = []cli.Flag{
 		Usage: "gRPC host and port",
 	},
 	cli.StringFlag{
+		Name:  "id, i",
+		Value: "random UUID",
+	},
+	cli.StringFlag{
 		Name:     "name, n",
 		Required: true,
 	},
 	cli.StringFlag{
 		Name:  "secret, s",
-		Value: "random string",
+		Value: utils.RandStringFlag,
 	},
 	cli.StringSliceFlag{
 		Name:  "redirect-uri, r",
@@ -46,19 +50,16 @@ var CreateClientFlags []cli.Flag = []cli.Flag{
 func CreateClient(c *cli.Context) error {
 	ctx := context.Background()
 
-	grpc, err := setup.SetupGrpcClient(ctx, c)
+	id, err := utils.ParseRandomUUID(c.String("id"))
 	if err != nil {
 		return err
 	}
 
-	id := c.Args().Get(0)
-	if id == "" {
-		return errors.New("client_id must be provided as first argument")
-	}
+	clientSecret := utils.ParseRandomString(c.String("secret"), 40)
 
-	clientSecret := c.String("secret")
-	if clientSecret == "random string" || clientSecret == "" {
-		clientSecret = utils.RandomString(utils.LettersSet, 40)
+	grpc, err := setup.SetupGrpcClient(ctx, c)
+	if err != nil {
+		return err
 	}
 
 	client := &api.Client{
