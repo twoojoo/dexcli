@@ -69,7 +69,33 @@ dexctl password create <email> --username <username> --hash <hash> [--grpc-url <
 ```
 
 ```bash
-dexctl password update <email> --username <new-username> --hash <new-hash> [--grpc-url <host:port>]
+dexctl password update <email> [--username <new-username> --hash <new-hash> --grpc-url <host:port>]
+```
+
+```bash
+dexctl password delete <email> [--grpc-url <host:port>]
+```
+
+```bash
+dexctl password verify <email> <password> [--grpc-url <host:port>]
+```
+
+#### connectors
+
+```bash
+dexctl connector get <id> [--grpc-url <host:port>]
+```
+
+```bash
+dexctl connector list [--grpc-url <host:port>]
+```
+
+```bash
+dexctl connector create --id <id> --type <type> --name <name> --config <json_config> [--grpc-url <host:port>]
+```
+
+```bash
+dexctl connector update <id> [--type <type> --name <name> --config <json_config> --grpc-url <host:port>]
 ```
 
 ```bash
