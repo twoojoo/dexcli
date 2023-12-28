@@ -14,7 +14,7 @@ make install
 
 A `Dex` instance must be running. `Dex` defaults match `dexctl` ones:
 
-- host: 127.0.0.1
+- host: 127.0.0.1 (won't match "localhost")
 - App port: 5555
 - Dex web port: 5556
 - Dex grpc port: 5558
