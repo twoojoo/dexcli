@@ -29,7 +29,7 @@ dexctl version [--grpc-url <host:port>]
 ```
 
 ```bash
-dexctl signon [--browser <browser>]
+dexctl signon <client_id> -s <client_secret> --scope <scope1> --scope <scope2> --offine-access [--browser <browser>]
 # will open up a browser window (default browser is autodetected in X11)
 ```
 
