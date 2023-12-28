@@ -26,23 +26,24 @@ dexctl --help
 
 ```bash
 dexctl version [--grpc-url <host:port>]
+# gets Dex server version
 ```
 
 ```bash
-dexctl signon [--browser <browser>]
+dexctl signon <client_id> -s <client_secret> --scope <scope1> --scope <scope2> --offine-access [--browser <browser>]
 # will open up a browser window (default browser is autodetected in X11)
 ```
 
 #### token
 
 ```bash
-dexctl token verify <token> --client-id <id>
+dexctl token verify <client_id> <token>
 ```
 
 #### clients
 
 ```bash
-dexctl client create <id> --name <name> --secret <secret>  --redirect-uri <uri> [--grpc-url <host:port>]
+dexctl client create <id> --name <name> --secret <secret> --redirect-uri <uri> [--grpc-url <host:port>]
 ```
 
 ```bash
