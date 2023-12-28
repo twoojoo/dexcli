@@ -23,14 +23,14 @@ var DeleteConnectorFlags []cli.Flag = []cli.Flag{
 func DeleteConnector(c *cli.Context) error {
 	ctx := context.Background()
 
-	grpc, err := setup.SetupGrpcClient(ctx, c)
-	if err != nil {
-		return err
-	}
-
 	id := c.Args().Get(0)
 	if id == "" {
 		return errors.New("client id must be provided as first argument")
+	}
+
+	grpc, err := setup.SetupGrpcClient(ctx, c)
+	if err != nil {
+		return err
 	}
 
 	resp, err := grpc.DeleteConnector(ctx, &api.DeleteConnectorReq{

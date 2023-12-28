@@ -39,19 +39,14 @@ var CreateConnectorFlags []cli.Flag = []cli.Flag{
 func CreateConnector(c *cli.Context) error {
 	ctx := context.Background()
 
-	grpc, err := setup.SetupGrpcClient(ctx, c)
+	id, err := utils.ParseRandomUUID(c.String("id"))
 	if err != nil {
 		return err
 	}
 
-	id := c.String("id")
-	if id == "random UUID" || id == "" {
-		uid, err := uuid.NewUUID()
-		if err != nil {
-			return err
-		}
-
-		id = uid.String()
+	grpc, err := setup.SetupGrpcClient(ctx, c)
+	if err != nil {
+		return err
 	}
 
 	resp, err := grpc.CreateConnector(ctx, &api.CreateConnectorReq{
